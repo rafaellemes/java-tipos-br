@@ -101,5 +101,15 @@ public class CPFTest {
         CPF.de(hue);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void deveRetornarErroSeNumerosRepetidos(){
+        CPF.de("44444444444");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void deveRetornarErroSeNumerosMaiorQue11(){
+        CPF.de("054484952302");
+    }
+
 
 }

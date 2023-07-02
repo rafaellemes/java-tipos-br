@@ -8,7 +8,7 @@ criando um repositório com os tipos e enumeradores mais comuns do contexto bras
 * Toda classe deve ser **final**
 * Todo tipo deve ser **imutável**
 * Toda classe deve ter **construtores públicos** e **static factories**
-* Toda classe deve sobrescrever o **equals** e o **hashcode**
+* Toda classe deve sobrescrever o **equals** e o **hashCode** e o **toString**
 * O nome da classe e a assinatura dos métodos público devem ser em **português**
 * Deve haver **comentário** no cabeçalho da classe explicando o tipo que a classe representa
 * Todo método público deve ter **comentários** e explicitar as **exceções** que podem ser lançada

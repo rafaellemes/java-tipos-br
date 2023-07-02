@@ -114,7 +114,7 @@ public class CPF {
     /**
      * Retorna o número do CPF como um texto simples sem formatação
      *
-     * @return cpf
+     * @return texto que representa um cpf
      */
     public String getTexto() {
         return this.numero;
@@ -124,7 +124,7 @@ public class CPF {
     /**
      * Retorna o CPF como um valor numérico
      *
-     * @return cpf
+     * @return número que representa um cpf
      */
     public Number getNumero() {
         return Long.valueOf(numero);
@@ -139,7 +139,7 @@ public class CPF {
     }
     private void validaCpf(String numero) {
 
-        if (numero.isBlank() || !isCPF(numero)) {
+        if (!isCPF(numero)) {
             throw new IllegalArgumentException(CPF_INVALIDO);
         }
     }
@@ -159,16 +159,10 @@ public class CPF {
 
 
     private boolean isCPF(String cpf) {
-        // Verifica se o número está fora do padrão de cpf ou de cpf formatado.
-        // Pattern do CPF com e sem formatação
-        String pattern = "\\d{11}|\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}";
-        if (!Pattern.compile(pattern).matcher(cpf).matches()) {
-            return false;
-        }
 
-        // Remove caracteres não númericos para cpf formatado
-        if (cpf.length() == 14) {
-            cpf = cpf.trim().replaceAll("\\D", "");
+
+        if(cpf.trim().isBlank() || cpf.length() > 11){
+            return false;
         }
 
         // Verifica se todos os números estão repetidos
