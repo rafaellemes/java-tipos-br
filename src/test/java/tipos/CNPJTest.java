@@ -31,7 +31,7 @@ public class CNPJTest {
     public void deveRetornarCNPJValidoQuandoTiverFormatacao() {
 
         final CNPJ cnpj = CNPJ.de("00.676.227/0001-51");
-        final CNPJ cnpj2 = CNPJ.de("00.676,227\\0001/51");
+        final CNPJ cnpj2 = CNPJ.de("0@0.6_7|6,227\\0001/51");
 
         assert "00676227000151".equals(cnpj.getTexto());
         assert "00676227000151".equals(cnpj2.getTexto());

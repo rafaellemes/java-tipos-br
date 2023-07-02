@@ -32,7 +32,7 @@ public class CPFTest {
     public void deveRetornarCpfValidoQuandoTiverFormatacao() {
 
         final CPF cpf = CPF.de("54.484.952-30");
-        final CPF cpf2 = CPF.de("54,484\\9!52/30");
+        final CPF cpf2 = CPF.de("5@4,4_8|4\\9!5-2/30");
 
         assert "05448495230".equals(cpf.getTexto());
         assert "05448495230".equals(cpf2.getTexto());

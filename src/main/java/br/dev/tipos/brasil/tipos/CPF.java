@@ -5,6 +5,9 @@ import java.text.ParseException;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import static br.dev.tipos.brasil.tipos.TiposUtil.completaComZeroAEsquerda;
+import static br.dev.tipos.brasil.tipos.TiposUtil.removeFormatacao;
+
 /**
  * Classe que representa um CPF (Cadastro de Pessoa Física)
  *
@@ -14,6 +17,7 @@ import java.util.regex.Pattern;
 public class CPF {
 
     private static final String CPF_INVALIDO = "CPF Inválido";
+    private static final int TAMANHO_CPF = 11;
     private static final int[] peso = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 
     private final String numero;
@@ -161,7 +165,7 @@ public class CPF {
     private boolean isCPF(String cpf) {
 
 
-        if(cpf.trim().isBlank() || cpf.length() > 11){
+        if(cpf.trim().isBlank() || cpf.length() > TAMANHO_CPF){
             return false;
         }
 
@@ -188,20 +192,10 @@ public class CPF {
         return soma > 9 ? 0 : soma;
     }
 
-    private String removeFormatacao(String cpf) {
-        return cpf.replaceAll("([-,/!\\.\\\\])", "");
-    }
+
 
     private String preencheComZeroAEsquerda(String cpf) {
-
-        if (cpf.length() < 11) {
-            int quantidadeZeroAPreencher = 11 - cpf.length();
-
-            return String.format("%s%s", "0".repeat(quantidadeZeroAPreencher), cpf);
-
-        }
-
-        return cpf;
+        return completaComZeroAEsquerda(TAMANHO_CPF, cpf);
     }
 
 

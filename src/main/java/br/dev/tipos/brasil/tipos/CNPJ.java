@@ -6,6 +6,9 @@ import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import static br.dev.tipos.brasil.tipos.TiposUtil.completaComZeroAEsquerda;
+import static br.dev.tipos.brasil.tipos.TiposUtil.removeFormatacao;
+
 /**
  * Classe que representa o Tipo CNPJ (Cadastro Nacional de Pessoa Jurídica)
  *
@@ -13,6 +16,7 @@ import java.util.regex.Pattern;
  */
 public final class CNPJ {
     private static final String CNPJ_INVALIDO = "CNPJ Inválido";
+    private static final int TAMANHO_CNPJ = 14;
 
     private final String numero;
 
@@ -134,26 +138,15 @@ public final class CNPJ {
         }
     }
 
-    private String removeFormatacao(String cnpj) {
-        return cnpj.replaceAll("([-,/!\\.\\\\])", "");
-    }
-
     private String preencheComZeroAEsquerda(String cnpj) {
 
-        if (cnpj.length() < 14) {
-            int quantidadeZeroAPreencher = 14 - cnpj.length();
-
-            return String.format("%s%s", "0".repeat(quantidadeZeroAPreencher), cnpj);
-
-        }
-
-        return cnpj;
+        return completaComZeroAEsquerda(TAMANHO_CNPJ, cnpj);
     }
 
 
     private boolean isCNPJ(String cnpj) {
 
-        if (cnpj.trim().isBlank() || cnpj.length() > 14) {
+        if (cnpj.trim().isBlank() || cnpj.length() > TAMANHO_CNPJ) {
             return false;
         }
 
