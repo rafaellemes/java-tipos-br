@@ -1,20 +1,20 @@
 package br.dev.tipos.brasil.tipos;
 
 import javax.swing.text.MaskFormatter;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import static br.dev.tipos.brasil.tipos.TiposUtil.completaComZeroAEsquerda;
-import static br.dev.tipos.brasil.tipos.TiposUtil.removeFormatacao;
+import static br.dev.tipos.brasil.tipos.TiposUtil.*;
 
 /**
  * Classe que representa o Tipo CNPJ (Cadastro Nacional de Pessoa Jurídica)
  *
  * @author Rafael Lemes
  */
-public final class CNPJ {
+public final class CNPJ implements Serializable {
     private static final String CNPJ_INVALIDO = "CNPJ Inválido";
     private static final int TAMANHO_CNPJ = 14;
 
@@ -31,7 +31,9 @@ public final class CNPJ {
     public CNPJ(String numero) {
 
         Objects.requireNonNull(numero, CNPJ_INVALIDO);
-        String semFormatacao = preencheComZeroAEsquerda(removeFormatacao(numero));
+        String semFormatacao = preencheComZeroAEsquerda(
+                removeFormatacao(
+                        limpaXss(numero)));
         validaCnpj(semFormatacao);
         this.numero = semFormatacao;
     }

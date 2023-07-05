@@ -1,10 +1,12 @@
 package br.dev.tipos.brasil.tipos;
 
 import javax.swing.text.MaskFormatter;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import static br.dev.tipos.brasil.tipos.TiposUtil.*;
 import static br.dev.tipos.brasil.tipos.TiposUtil.completaComZeroAEsquerda;
 import static br.dev.tipos.brasil.tipos.TiposUtil.removeFormatacao;
 
@@ -14,7 +16,7 @@ import static br.dev.tipos.brasil.tipos.TiposUtil.removeFormatacao;
  * @author Rafael Lemes
  *
  */
-public class CPF {
+public class CPF implements Serializable {
 
     private static final String CPF_INVALIDO = "CPF Inválido";
     private static final int TAMANHO_CPF = 11;
@@ -33,7 +35,9 @@ public class CPF {
     public CPF(String numero) {
 
         Objects.requireNonNull(numero, CPF_INVALIDO);
-        String semFormatacao = preencheComZeroAEsquerda(removeFormatacao(numero));
+        String semFormatacao = preencheComZeroAEsquerda(
+                removeFormatacao(
+                        limpaXss(numero)));
         validaCpf(semFormatacao);
         this.numero = semFormatacao;
     }

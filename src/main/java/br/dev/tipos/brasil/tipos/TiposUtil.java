@@ -50,9 +50,21 @@ class TiposUtil {
 
         Objects.requireNonNull(valor, MENSAGEM);
 
-        final String pattern = "([|])|([.])|([$])|([-,/#!%_@\\\\])";
+        final String pattern = "( )|([|])|([.])|([$])|([-,/#!%_@\\\\])";
 
         return valor.replaceAll(pattern, "");
+    }
+
+    /**
+     * Sanitiza o valor removendo possíveis ataque XSS
+     *
+     * @param valor a ser sanitizado, não pode ser nulo
+     * @return valor sanitizado
+     * @throws NullPointerException se valor for nulo
+     */
+    public static String limpaXss(String valor){
+        //TODO implementar sanitização contra ataque Cross Site Scripting
+        return valor;
     }
 
 }

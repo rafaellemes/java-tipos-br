@@ -6,6 +6,16 @@ import org.junit.Test;
 public class CNPJTest {
 
     @Test
+    public void deveRetornarCNPJValidoQuandoForNumerico191() {
+
+        final CNPJ cnpj = CNPJ.de(191L);
+
+        assert "00000000000191".equals(cnpj.getTexto());
+        assert "00.000.000/0001-91".equals(cnpj.getTextoFormatado());
+        assert 191L == cnpj.getNumero().longValue();
+
+    }
+    @Test
     public void deveRetornarCNPJValidoQuandoForNumericoENaoHouverZeroAEsquerda() {
 
         final CNPJ cnpj = CNPJ.de(676_227_0001_51L);

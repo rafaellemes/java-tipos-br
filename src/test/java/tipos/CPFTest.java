@@ -6,6 +6,18 @@ import org.junit.Test;
 
 public class CPFTest {
 
+
+    @Test
+    public void deveRetornarCPFValidoQuandoForNumerico191() {
+
+        final CPF cpf = CPF.de(191L);
+
+        assert "00000000191".equals(cpf.getTexto());
+        assert "000.000.001-91".equals(cpf.getTextoFormatado());
+        assert 191L == cpf.getNumero().longValue();
+
+    }
+
     @Test
     public void deveRetornarCpfValidoQuandoForNumericoENaoHouverZeroAEsquerda() {
 
