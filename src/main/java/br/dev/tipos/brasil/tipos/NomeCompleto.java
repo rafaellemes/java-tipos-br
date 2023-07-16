@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
  * <a href="https://twitter.com/nenhumrafael">Twitter</a>
  * <a href="https://www.linkedin.com/in/rafael-lemes/">LinkedIn</a>
  */
-public class NomeCompleto implements Serializable {
+public final class NomeCompleto implements Serializable {
 
     private final String nomePorExtenso;
     private final String nome;
