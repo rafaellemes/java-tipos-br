@@ -18,6 +18,7 @@ public class CPFCNPJTest {
         assert cnpj.isCNPJ();
         assert 191 == cnpj.getNumero().intValue();
         assert "00.000.000/0001-91".equals(cnpj.getTextoFormatado());
+        assert "00000000000191".equals(cnpj.getTexto());
 
     }
 

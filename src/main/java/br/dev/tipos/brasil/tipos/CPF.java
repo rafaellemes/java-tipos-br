@@ -13,8 +13,9 @@ import static br.dev.tipos.brasil.tipos.TiposUtil.removeFormatacao;
 /**
  * Classe que representa um CPF (Cadastro de Pessoa Física)
  *
- * @author Rafael Lemes
- *
+ * @author Rafael Lemes <br/>
+ * <a href="https://twitter.com/nenhumrafael">Twitter</a>
+ * <a href="https://www.linkedin.com/in/rafael-lemes/">LinkedIn</a>
  */
 public class CPF implements Serializable {
 
@@ -139,12 +140,13 @@ public class CPF implements Serializable {
     }
 
 
-
-
     @Override
     public String toString() {
-        return getTexto();
+        return "CPF{" +
+                "numero='" + numero + '\'' +
+                '}';
     }
+
     private void validaCpf(String numero) {
 
         if (!isCPF(numero)) {

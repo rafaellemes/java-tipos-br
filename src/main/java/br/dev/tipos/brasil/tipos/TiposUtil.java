@@ -1,6 +1,9 @@
 package br.dev.tipos.brasil.tipos;
 
+import java.text.Normalizer;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Classe utilitária com funções comuns entre os tipos
@@ -66,5 +69,67 @@ class TiposUtil {
         //TODO implementar sanitização contra ataque Cross Site Scripting
         return valor;
     }
+
+    /**
+     * Sanitiza o valor removendo formataçao, xss, espaços nas laterais e espaços duplicados
+     *
+     * @param valor texto a ser sanitizado
+     * @return texto sanitizado
+     * @throws NullPointerException se valor for nulo
+     */
+    public static String sanitiza(String valor){
+        Objects.requireNonNull(valor, MENSAGEM);
+        //TODO remover espaços duplicados
+        return limpaXss(valor).trim();
+    }
+
+    /**
+     *
+     * Transforma em maíscula a primeira letra de cada palavra separado por um delimitador
+     *
+     * @param valor texto a ser capitalizado
+     * @param delimitador o valor que será usado para delimitar as palavras
+     * @return texto com as primeiras letras maíscula
+     * @throws NullPointerException se valor ou delimitador forem nulos
+     */
+    public static String transformaEmMaisculaPrimeiraLetraCadaPalavra(String valor, String delimitador){
+
+        Objects.requireNonNull(valor);
+        Objects.requireNonNull(delimitador);
+
+        return Stream.of(valor.split(delimitador))
+                .map(TiposUtil::capitalize)
+                .collect(Collectors.joining(delimitador));
+
+    }
+
+    /**
+     *
+     * Transforma a Primeira Letra em Maíscula e o restande em mínuscula
+     *
+     * @param valor palavra a ser trasformada
+     * @return Cadeia de caracteres com a primeira letra maíscula
+     * @throws NullPointerException se valor for nulo
+     */
+    public static String capitalize(String valor){
+        Objects.requireNonNull(valor);
+        return String.join("",
+                valor.substring(0,1).toUpperCase(),
+                valor.substring(1).toLowerCase());
+    }
+
+    /**
+     * Substitui letras com acentos por letras comuns <br/>
+     * ex:Ó por O, á por a e etc
+     * @param valor a ser normalizado
+     * @return valor normalizado
+     */
+    public static String normaliza(String valor){
+
+        return Normalizer
+                .normalize(valor, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "");
+    }
+
 
 }

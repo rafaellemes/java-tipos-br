@@ -11,13 +11,14 @@ import static br.dev.tipos.brasil.tipos.TiposUtil.removeFormatacao;
  * Invólucro (Wrapper) onde o campo pode ser cpf ou cnpj a partir da quantidade de caracteres passado o <br/>
  * por exemplo: se 11 ou menor será um CPF se não será um CNPJ
  *
- * @author Rafael Lemes
+ * @author Rafael Lemes <br/>
+ * <a href="https://twitter.com/nenhumrafael">Twitter</a>
+ * <a href="https://www.linkedin.com/in/rafael-lemes/">LinkedIn</a>
  */
 public final class CPFCNPJ implements Serializable {
 
     private final static String MSG_NUMERO_INVALIDO = "O Parâmetro numero não pode ser nulo";
     private final static String MSG_NUMERO_NAO_NEGATIVO = "Numero não pode ser negativo";
-    private final static int TAMANHO_CPF = 11;
 
     private CPF cpf;
     private CNPJ cnpj;
@@ -134,7 +135,6 @@ public final class CPFCNPJ implements Serializable {
         try {
             this.cpf = CPF.de(cpfcnpj);
             this.ehCpf = true;
-            return;
         } catch (IllegalArgumentException ignored) {
             throw new IllegalArgumentException(MSG_NUMERO_INVALIDO);
         }
@@ -229,5 +229,14 @@ public final class CPFCNPJ implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(cpf, cnpj);
+    }
+
+    @Override
+    public String toString() {
+        return "CPFCNPJ{" +
+                "numero=" + (isCPF() ? cpf.getTextoFormatado() : cnpj.getTextoFormatado()) +
+                ", isCpf=" + isCPF() +
+                ", isCnpj=" + isCNPJ() +
+                '}';
     }
 }

@@ -12,7 +12,9 @@ import static br.dev.tipos.brasil.tipos.TiposUtil.*;
 /**
  * Classe que representa o Tipo CNPJ (Cadastro Nacional de Pessoa Jurídica)
  *
- * @author Rafael Lemes
+ * @author Rafael Lemes <br/>
+ * <a href="https://twitter.com/nenhumrafael">Twitter</a>
+ * <a href="https://www.linkedin.com/in/rafael-lemes/">LinkedIn</a>
  */
 public final class CNPJ implements Serializable {
     private static final String CNPJ_INVALIDO = "CNPJ Inválido";
@@ -219,6 +221,8 @@ public final class CNPJ implements Serializable {
 
     @Override
     public String toString() {
-        return getTexto();
+        return "CNPJ{" +
+                "numero='" + numero + '\'' +
+                '}';
     }
 }
