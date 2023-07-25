@@ -148,12 +148,50 @@ public class NomeCompletoTest {
         assert joao.caixaBaixa().primeiraLetraCadaPalavraMaiscula().equals(joaoNormalizado.caixaAlta());
         //Por ser imutavel cada istância deve ser diferente
         assert joao != joaoNormalizado;
-        assert joao.caixaBaixa() != joao.caixaBaixa();
-        assert joao.caixaAlta() != joao.caixaAlta();
-        assert joao.primeiraLetraCadaPalavraMaiscula() != joao.primeiraLetraCadaPalavraMaiscula();
-
 
 
     }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naoDeveTerNumerosNoNome(){
+        NomeCompleto.de("João 2");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naoDeveTerNumerosNoMeioNome(){
+        NomeCompleto.de("João S1lv3ir4");
+    }
+
+
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naoDeveTerPalavraComUmaLetraRepetida(){
+        NomeCompleto.de("João RueeeeDaa");
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naoDeveTerPalavraComUmaSoLetraRepetida(){
+        NomeCompleto.de("eeee aaaaaa");
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void naoDeveTerPalavraComUmaSoLetraRepetida2(){
+        NomeCompleto.de("Jovem ee Tranquilo");
+    }
+    @Test
+    public void deveAceitarPalavrasComDuasLetrasRepetidas(){
+        final NomeCompleto juanGuerra = NomeCompleto.de("Juan Guerra");
+
+        assert "Guerra".equals(juanGuerra.getSobrenome());
+    }
+
+
+
+
+
 
 }

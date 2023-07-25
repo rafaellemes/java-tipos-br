@@ -119,6 +119,7 @@ public final class NomeCompleto implements Serializable {
                 || valor.trim().length() < 3){
             throw new IllegalArgumentException("Deve ter ao menos dois caracteres, e Deve ser Composto por Nome e Sobrenome");
         }
+        validaSeContemApenasLetrasECaracteresRepetidos(valor);
     }
 
     private void valida(String nomeCompleto){
@@ -128,7 +129,7 @@ public final class NomeCompleto implements Serializable {
                 || !nomeCompleto.contains(" ")){
             throw new IllegalArgumentException("Deve ter ao menos dois caracteres, e Deve ser Composto por Nome e Sobrenome");
         }
-
+        validaSeContemApenasLetrasECaracteresRepetidos(nomeCompleto);
     }
 
     /**
@@ -178,6 +179,24 @@ public final class NomeCompleto implements Serializable {
         return transformaEmMaisculaPrimeiraLetraCadaPalavra(val, " ");
 
     }
+
+    private void validaSeContemApenasLetrasECaracteresRepetidos(String valor){
+
+
+        if (valor.matches(".*\\d.*")){
+            throw new IllegalArgumentException("O Nome deve conter apenas o Alfabeto Brasileiro");
+        }
+
+        Stream.of(valor.split(" ")).forEach(el -> {
+            if((el.length() == 2 && el.matches(".*(.)\\1.*"))
+                    || el.matches(".*(.)\\1{2}.*")){
+                throw new IllegalArgumentException("O Nome não deve conter caracteres repetidos");
+            }
+        });
+
+    }
+
+
 
 
 }
